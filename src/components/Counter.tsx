@@ -11,19 +11,18 @@ const Counter: FunctionComponent = () => {
     if (number === sum) {
       setStart(false);
     }
+    const temp = sum / ( time * (29.4 * 24 * 60 * 60 * 10));
     const timer = (time && sum) && setInterval(() => {
-      const temp = sum / ( time * (29.4 * 24 * 60 * 60 * 10));
-      setNumber(prev => prev + temp)
+      setNumber(prev => +(prev + temp).toFixed(2))
     }, 100);
 
     if (startedTime) {
       const timeCorrect = (Date.now() - startedTime!) / 100;
-      const temp = sum / ( time * (29.4 * 24 * 60 * 60 * 10));
       if (timeCorrect * temp !== number) {
-        setNumber(timeCorrect * temp);
+        setNumber(+(timeCorrect * temp).toFixed(2));
       }
     }
-    
+    document.title = number.toString();
     return () => clearInterval(timer as NodeJS.Timeout);
   }, [start, number])
  
