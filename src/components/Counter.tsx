@@ -39,9 +39,12 @@ const Counter: FunctionComponent = () => {
         setNumber(+(timeCorrect * increment).toFixed(2));
       }
     }
-    document.title = number.toString();
     return () => clearInterval(timer as NodeJS.Timeout);
   }, [start])
+
+  useEffect(() => {
+    document.title = number.toString();
+  }, [number])
  
   const startHandler = () => {
     setStartedTime(Date.now())
